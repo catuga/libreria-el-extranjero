@@ -1,65 +1,71 @@
-import Image from "next/image";
+import { prisma } from "@/lib/prisma"
+import Link from "next/link"
+import Image from "next/image"
+import Slider from "@/components/Slider"
 
-export default function Home() {
+export default async function HomePage() {
+  const destacados = await prisma.libro.findMany({
+    where: { destacado: true, activo: true },
+    take: 3,
+  })
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="space-y-16">
+
+      {/* Slider de eventos */}
+      <Slider />
+
+      {/* Sección recomendados — estilo Materia Prima */}
+      <section>
+        <h2 className="text-xs font-semibold tracking-widest uppercase text-[#1A1A1A]/40 mb-8 pb-3 border-b border-[#1A1A1A]/10">
+          Selección de la casa
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {destacados.map((libro) => (
+            <Link key={libro.id} href={`/libro/${libro.slug}`} className="group">
+              {/* Cover grande */}
+              <div className="relative bg-[#D94F35]/8 aspect-[3/4] overflow-hidden mb-5 group-hover:bg-[#D94F35]/15 transition-colors">
+                {libro.portada
+                  ? <Image src={libro.portada} alt={libro.titulo} fill className="object-cover" />
+                  : <span className="absolute inset-0 flex items-center justify-center text-[#D94F35]/30 text-xs uppercase tracking-widest">portada</span>
+                }
+                {/* Etiqueta superpuesta al hover — estilo Materia Prima */}
+                <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <span
+                    className="inline-block text-xs font-semibold tracking-wider px-3 py-1.5"
+                    style={{ backgroundColor: "#FFFFFF", color: "#D94F35" }}
+                  >
+                    {libro.generos[0] ?? "LITERATURA"}
+                  </span>
+                </div>
+              </div>
+              {/* Info — estilo Materia Prima: uppercase, bold */}
+              <p className="font-semibold text-sm uppercase tracking-wide leading-snug">
+                {libro.titulo}
+              </p>
+              <p
+                className="text-[#1A1A1A]/60 text-sm mt-0.5 italic"
+                style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              >
+                {libro.autor}
+              </p>
+              <p className="text-[#1A1A1A]/40 text-xs mt-1 uppercase tracking-wide">
+                {libro.precio.toFixed(2)} €
+              </p>
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/catalogo"
+            className="text-xs font-semibold tracking-widest uppercase border-b border-[#1A1A1A]/30 pb-0.5 hover:border-[#D94F35] hover:text-[#D94F35] transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Ver catálogo completo →
+          </Link>
         </div>
-      </main>
+      </section>
+
     </div>
-  );
+  )
 }

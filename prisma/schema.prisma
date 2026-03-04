@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── CATÁLOGO ───────────────────────────────────────────────
+
+model Libro {
+  id          String   @id @default(cuid())
+  titulo      String
+  autor       String
+  isbn        String?  @unique
+  editorial   String?
+  anio        Int?
+  precio      Float
+  stock       Int      @default(0)
+  descripcion String?
+  portada     String?  // URL de la imagen
+  slug        String   @unique
+  destacado   Boolean  @default(false)
+  activo      Boolean  @default(true)
+  generos     String[] // array de géneros/categorías
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  itemsPedido ItemPedido[]
+}
+
+// ─── CLIENTES ───────────────────────────────────────────────
+
+model Cliente {
+  id        String   @id @default(cuid())
+  nombre    String
+  email     String   @unique
+  telefono  String?
+  createdAt DateTime @default(now())
+
+  suscrito  Boolean  @default(true) // suscrito al newsletter
+  pedidos   Pedido[]
+}
+
+// ─── NEWSLETTER ─────────────────────────────────────────────
+
+model Suscriptor {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  nombre    String?
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  asunto    String
+  cuerpo    String
+  enviadoAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+// ─── PEDIDOS ────────────────────────────────────────────────
+
+model Pedido {
+  id        String       @id @default(cuid())
+  clienteId String
+  cliente   Cliente      @relation(fields: [clienteId], references: [id])
+  estado    EstadoPedido @default(PENDIENTE)
+  total     Float
+  notas     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  items ItemPedido[]
+}
+
+model ItemPedido {
+  id       String @id @default(cuid())
+  pedidoId String
+  pedido   Pedido @relation(fields: [pedidoId], references: [id])
+  libroId  String
+  libro    Libro  @relation(fields: [libroId], references: [id])
+  cantidad Int
+  precio   Float  // precio en el momento de la compra
+}
+
+enum EstadoPedido {
+  PENDIENTE
+  CONFIRMADO
+  PREPARANDO
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+// ─── ADMIN (NextAuth) ────────────────────────────────────────
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // hash bcrypt
+  nombre    String
+  createdAt DateTime @default(now())
+}
