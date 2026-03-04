@@ -12,11 +12,11 @@ export default async function EventosPage() {
   const pasados = eventos.filter((e) => e.fecha < ahora)
 
   return (
-    <div className="py-10">
-      <div className="mb-10">
+    <div className="py-6 md:py-10">
+      <div className="mb-8 md:mb-10">
         <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-3">Agenda</p>
         <h1
-          className="text-4xl uppercase tracking-wide text-[#1A1A1A]"
+          className="text-2xl md:text-4xl uppercase tracking-wide text-[#1A1A1A]"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
         >
           Eventos

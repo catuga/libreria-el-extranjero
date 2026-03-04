@@ -13,15 +13,15 @@ export default async function CatalogoPage() {
   return (
     <div>
       <h1
-        className="text-4xl mb-10 uppercase"
+        className="text-2xl md:text-4xl mb-6 md:mb-10 uppercase pt-4"
         style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.02em" }}
       >
         Catálogo
       </h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {libros.map((libro) => (
           <Link key={libro.id} href={`/libro/${libro.slug}`} className="group">
-            <div className="relative bg-[#D94F35]/10 aspect-[2/3] mb-3 overflow-hidden group-hover:bg-[#D94F35]/20 transition-colors">
+            <div className="relative bg-rojo/10 aspect-2/3 mb-3 overflow-hidden group-hover:bg-rojo/20 transition-colors">
               {libro.portada
                 ? <Image src={libro.portada} alt={libro.titulo} fill className="object-cover" />
                 : <span className="absolute inset-0 flex items-center justify-center text-[#D94F35]/40 text-xs">portada</span>

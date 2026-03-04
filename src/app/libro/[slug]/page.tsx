@@ -11,12 +11,12 @@ export default async function LibroPage({ params }: { params: Promise<{ slug: st
 
   return (
     <div>
-      <Link href="/catalogo" className="text-sm text-[#1A1A1A]/50 hover:text-[#1A1A1A] transition-colors mb-8 inline-block">
+      <Link href="/catalogo" className="text-sm text-[#1A1A1A]/50 hover:text-[#1A1A1A] transition-colors mb-6 inline-block pt-4">
         ← Volver al catálogo
       </Link>
-      <div className="flex flex-col md:flex-row gap-10 mt-2">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-2">
         {/* Portada */}
-        <div className="relative bg-[#D94F35]/10 w-full md:w-56 aspect-[2/3] flex-shrink-0 overflow-hidden">
+        <div className="relative bg-[#D94F35]/10 w-full max-w-[220px] mx-auto md:mx-0 md:w-56 aspect-[2/3] flex-shrink-0 overflow-hidden">
           {libro.portada
             ? <Image src={libro.portada} alt={libro.titulo} fill className="object-cover" />
             : <span className="absolute inset-0 flex items-center justify-center text-[#D94F35]/40 text-sm">portada</span>

@@ -25,11 +25,11 @@ export default async function SuscribirsePage({ searchParams }: Props) {
   const { ok } = await searchParams
 
   return (
-    <div className="max-w-lg mx-auto py-16">
+    <div className="max-w-lg mx-auto py-8 md:py-16">
       <div className="mb-10">
         <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-3">Newsletter</p>
         <h1
-          className="text-4xl uppercase tracking-wide text-[#1A1A1A] mb-4"
+          className="text-2xl md:text-4xl uppercase tracking-wide text-[#1A1A1A] mb-4"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
         >
           Únete a nuestra lista

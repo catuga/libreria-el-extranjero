@@ -36,10 +36,10 @@ export default async function ContactoPage({ searchParams }: Props) {
   const { enviado } = await searchParams
 
   return (
-    <div className="max-w-lg mx-auto py-16">
+    <div className="max-w-lg mx-auto py-8 md:py-16">
       <div className="mb-10">
         <h1
-          className="text-4xl uppercase tracking-wide text-[#1A1A1A] mb-3"
+          className="text-2xl md:text-4xl uppercase tracking-wide text-[#1A1A1A] mb-3"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
         >
           Contacto

@@ -16,17 +16,19 @@ export default async function HomePage() {
   ])
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-10 md:space-y-16">
 
-      {/* Slider de eventos */}
-      <Slider slides={slides} />
+      {/* Slider de eventos — negativo para anular el px-4 del main */}
+      <div className="-mx-4 md:mx-0">
+        <Slider slides={slides} />
+      </div>
 
       {/* Sección recomendados — estilo Materia Prima */}
       <section>
-        <h2 className="text-xs font-semibold tracking-widest uppercase text-[#1A1A1A]/40 mb-8 pb-3 border-b border-[#1A1A1A]/10">
+        <h2 className="text-xs font-semibold tracking-widest uppercase text-[#1A1A1A]/40 mb-6 md:mb-8 pb-3 border-b border-[#1A1A1A]/10">
           Selección de la casa
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {destacados.map((libro) => (
             <Link key={libro.id} href={`/libro/${libro.slug}`} className="group">
               {/* Cover grande */}
