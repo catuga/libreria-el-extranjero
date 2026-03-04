@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import type { Suscriptor, Cliente } from "@prisma/client"
 
 export default async function AdminClientes() {
   const [clientes, suscriptores] = await Promise.all([
@@ -28,7 +29,7 @@ export default async function AdminClientes() {
       {/* Suscriptores newsletter */}
       <section className="mb-10">
         <h2 className="text-xs font-semibold tracking-widest uppercase text-[#1A1A1A]/40 mb-4">
-          Suscriptores al newsletter ({suscriptores.filter((s) => s.activo).length} activos)
+          Suscriptores al newsletter ({suscriptores.filter((s: Suscriptor) => s.activo).length} activos)
         </h2>
 
         <div className="bg-white border border-[#1A1A1A]/10 rounded-lg overflow-hidden">
