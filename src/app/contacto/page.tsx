@@ -1,13 +1,10 @@
-"use server"
-
 import { Resend } from "resend"
 import { redirect } from "next/navigation"
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 async function enviarContacto(formData: FormData) {
   "use server"
 
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const nombre = formData.get("nombre") as string
   const email = formData.get("email") as string
   const mensaje = formData.get("mensaje") as string

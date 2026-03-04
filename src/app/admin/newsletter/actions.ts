@@ -4,9 +4,8 @@ import { prisma } from "@/lib/prisma"
 import { Resend } from "resend"
 import { revalidatePath } from "next/cache"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function enviarNewsletter(formData: FormData) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const asunto = formData.get("asunto") as string
   const cuerpo = formData.get("cuerpo") as string
 
