@@ -1,11 +1,12 @@
 import { prisma } from "@/lib/prisma"
+import { Prisma } from "@prisma/client"
 import { enviarNewsletter } from "./actions"
 
+type NewsletterRow = Prisma.NewsletterGetPayload<Record<string, never>>
+
 export default async function AdminNewsletter() {
-  const [suscriptoresActivos, newsletters] = await Promise.all([
-    prisma.suscriptor.count({ where: { activo: true } }),
-    prisma.newsletter.findMany({ orderBy: { createdAt: "desc" } }),
-  ])
+  const suscriptoresActivos = await prisma.suscriptor.count({ where: { activo: true } })
+  const newsletters: NewsletterRow[] = await prisma.newsletter.findMany({ orderBy: { createdAt: "desc" } })
 
   return (
     <div className="p-8">

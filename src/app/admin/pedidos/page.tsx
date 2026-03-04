@@ -1,6 +1,13 @@
 import { prisma } from "@/lib/prisma"
-import { EstadoPedido } from "@prisma/client"
+import { EstadoPedido, Prisma } from "@prisma/client"
 import { actualizarEstadoPedido } from "./actions"
+
+type PedidoRow = Prisma.PedidoGetPayload<{
+  include: {
+    cliente: { select: { nombre: true; email: true } }
+    items: { include: { libro: { select: { titulo: true } } } }
+  }
+}>
 
 const estadoColores: Record<EstadoPedido, string> = {
   PENDIENTE: "bg-yellow-50 text-yellow-700",
@@ -19,7 +26,7 @@ const estadoSiguiente: Partial<Record<EstadoPedido, EstadoPedido>> = {
 }
 
 export default async function AdminPedidos() {
-  const pedidos = await prisma.pedido.findMany({
+  const pedidos: PedidoRow[] = await prisma.pedido.findMany({
     orderBy: { createdAt: "desc" },
     include: {
       cliente: { select: { nombre: true, email: true } },

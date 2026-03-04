@@ -1,15 +1,21 @@
 import { prisma } from "@/lib/prisma"
+import { Prisma } from "@prisma/client"
+
+type SuscriptorRow = Prisma.SuscriptorGetPayload<Record<string, never>>
+type ClienteRow = Prisma.ClienteGetPayload<{
+  include: { _count: { select: { pedidos: true } } }
+}>
 
 export default async function AdminClientes() {
-  const clientes = await prisma.cliente.findMany({
+  const clientes: ClienteRow[] = await prisma.cliente.findMany({
     orderBy: { createdAt: "desc" },
     include: { _count: { select: { pedidos: true } } },
   })
-  const suscriptores = await prisma.suscriptor.findMany({
+  const suscriptores: SuscriptorRow[] = await prisma.suscriptor.findMany({
     orderBy: { createdAt: "desc" },
   })
 
-  const suscriptoresActivos = suscriptores.filter((s: { activo: boolean }) => s.activo).length
+  const suscriptoresActivos = suscriptores.filter((s) => s.activo).length
 
   return (
     <div className="p-8">
