@@ -3,10 +3,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { eliminarSlide } from "./actions"
 
-type SlideRow = Awaited<ReturnType<typeof prisma.sliderItem.findMany>>[number]
-
 export default async function AdminSlider() {
-  const slides: SlideRow[] = await prisma.sliderItem.findMany({
+  const slides = await prisma.sliderItem.findMany({
     orderBy: { orden: "asc" },
   })
 

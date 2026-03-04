@@ -2,13 +2,6 @@ import { prisma } from "@/lib/prisma"
 import { EstadoPedido } from "@prisma/client"
 import { actualizarEstadoPedido } from "./actions"
 
-type PedidoRow = Awaited<ReturnType<typeof prisma.pedido.findMany<{
-  include: {
-    cliente: { select: { nombre: true; email: true } }
-    items: { include: { libro: { select: { titulo: true } } } }
-  }
-}>>>[number]
-
 const estadoColores: Record<EstadoPedido, string> = {
   PENDIENTE: "bg-yellow-50 text-yellow-700",
   CONFIRMADO: "bg-blue-50 text-blue-700",
@@ -26,7 +19,7 @@ const estadoSiguiente: Partial<Record<EstadoPedido, EstadoPedido>> = {
 }
 
 export default async function AdminPedidos() {
-  const pedidos: PedidoRow[] = await prisma.pedido.findMany({
+  const pedidos = await prisma.pedido.findMany({
     orderBy: { createdAt: "desc" },
     include: {
       cliente: { select: { nombre: true, email: true } },

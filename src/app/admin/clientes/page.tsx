@@ -1,16 +1,11 @@
 import { prisma } from "@/lib/prisma"
 
-type ClienteRow = Awaited<ReturnType<typeof prisma.cliente.findMany<{
-  include: { _count: { select: { pedidos: true } } }
-}>>>[number]
-type SuscriptorRow = Awaited<ReturnType<typeof prisma.suscriptor.findMany>>[number]
-
 export default async function AdminClientes() {
-  const clientes: ClienteRow[] = await prisma.cliente.findMany({
+  const clientes = await prisma.cliente.findMany({
     orderBy: { createdAt: "desc" },
     include: { _count: { select: { pedidos: true } } },
   })
-  const suscriptores: SuscriptorRow[] = await prisma.suscriptor.findMany({
+  const suscriptores = await prisma.suscriptor.findMany({
     orderBy: { createdAt: "desc" },
   })
 
@@ -32,7 +27,7 @@ export default async function AdminClientes() {
 
       {/* Suscriptores newsletter */}
       <section className="mb-10">
-        <h2 className="text-xs font-semibold tracking-widest uppercase text-[#1A1A1A]/40 mb-4">
+        <h2 className="text-xs font-semibold tracking-widests uppercase text-[#1A1A1A]/40 mb-4">
           Suscriptores al newsletter ({suscriptoresActivos} activos)
         </h2>
 

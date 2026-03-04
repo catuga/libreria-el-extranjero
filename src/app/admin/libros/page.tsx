@@ -3,10 +3,8 @@ import Link from "next/link"
 import { archivarLibro, restaurarLibro, toggleDestacado } from "./actions"
 import Image from "next/image"
 
-type LibroRow = Awaited<ReturnType<typeof prisma.libro.findMany>>[number]
-
 export default async function AdminLibros() {
-  const libros: LibroRow[] = await prisma.libro.findMany({
+  const libros = await prisma.libro.findMany({
     orderBy: { createdAt: "desc" },
   })
 

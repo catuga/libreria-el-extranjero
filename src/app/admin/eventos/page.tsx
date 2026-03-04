@@ -3,10 +3,8 @@ import Link from "next/link"
 import { archivarEvento } from "./actions"
 import Image from "next/image"
 
-type EventoRow = Awaited<ReturnType<typeof prisma.evento.findMany>>[number]
-
 export default async function AdminEventos() {
-  const eventos: EventoRow[] = await prisma.evento.findMany({
+  const eventos = await prisma.evento.findMany({
     orderBy: { fecha: "asc" },
   })
 
