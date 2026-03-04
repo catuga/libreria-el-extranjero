@@ -4,16 +4,22 @@ import Image from "next/image"
 import Slider from "@/components/Slider"
 
 export default async function HomePage() {
-  const destacados = await prisma.libro.findMany({
-    where: { destacado: true, activo: true },
-    take: 3,
-  })
+  const [destacados, slides] = await Promise.all([
+    prisma.libro.findMany({
+      where: { destacado: true, activo: true },
+      take: 3,
+    }),
+    prisma.sliderItem.findMany({
+      where: { activo: true },
+      orderBy: { orden: "asc" },
+    }),
+  ])
 
   return (
     <div className="space-y-16">
 
       {/* Slider de eventos */}
-      <Slider />
+      <Slider slides={slides} />
 
       {/* Sección recomendados — estilo Materia Prima */}
       <section>

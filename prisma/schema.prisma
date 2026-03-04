@@ -95,6 +95,32 @@ enum EstadoPedido {
   CANCELADO
 }
 
+// ─── SLIDER ─────────────────────────────────────────────────
+
+model SliderItem {
+  id          String   @id @default(cuid())
+  titulo      String
+  descripcion String?
+  etiqueta    String?
+  imagen      String?  // URL Vercel Blob
+  color       String   @default("#D94F35")
+  orden       Int      @default(0)
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+// ─── EVENTOS ────────────────────────────────────────────────
+
+model Evento {
+  id          String   @id @default(cuid())
+  titulo      String
+  fecha       DateTime
+  descripcion String?
+  imagen      String?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
 // ─── ADMIN (NextAuth) ────────────────────────────────────────
 
 model AdminUser {

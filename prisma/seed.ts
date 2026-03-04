@@ -1,4 +1,5 @@
-import { PrismaClient } from "../src/generated/prisma/index.js"
+import { PrismaClient } from "@prisma/client"
+import { hashSync } from "bcryptjs"
 
 const prisma = new PrismaClient()
 
@@ -12,6 +13,7 @@ async function main() {
   await prisma.suscriptor.deleteMany()
   await prisma.newsletter.deleteMany()
   await prisma.libro.deleteMany()
+  await prisma.evento.deleteMany()
   await prisma.adminUser.deleteMany()
 
   // ─── LIBROS ────────────────────────────────────────────────
@@ -101,6 +103,33 @@ async function main() {
     ],
   })
 
+  // ─── SLIDER ────────────────────────────────────────────────
+  await prisma.sliderItem.createMany({
+    data: [
+      {
+        titulo: "Presentación: La ciudad y sus muros",
+        descripcion: "Jueves 20 de marzo · 19:00h · El Extranjero, Sevilla",
+        etiqueta: "EVENTO",
+        color: "#D94F35",
+        orden: 0,
+      },
+      {
+        titulo: "Club de lectura de marzo",
+        descripcion: "Este mes leemos «El túnel» de Ernesto Sabato. Apúntate gratis.",
+        etiqueta: "CLUB DE LECTURA",
+        color: "#2A2A2A",
+        orden: 1,
+      },
+      {
+        titulo: "Novedades de primavera",
+        descripcion: "Han llegado nuevos títulos seleccionados por el equipo de la librería.",
+        etiqueta: "NUEVO",
+        color: "#5C4A3A",
+        orden: 2,
+      },
+    ],
+  })
+
   // ─── SUSCRIPTORES ──────────────────────────────────────────
   await prisma.suscriptor.createMany({
     data: [
@@ -111,16 +140,17 @@ async function main() {
   })
 
   // ─── ADMIN ─────────────────────────────────────────────────
-  // Contraseña de prueba: "admin123" (luego la hashearemos con bcrypt)
+  // Contraseña de prueba: "admin123_cambiar_esto" (hashada con bcrypt)
   await prisma.adminUser.create({
     data: {
       email: "admin@libreria.com",
-      password: "admin123_cambiar_esto",
+      password: hashSync("admin123_cambiar_esto", 10),
       nombre: "Admin",
     },
   })
 
   console.log(`✅ ${libros.count} libros creados`)
+  console.log("✅ 3 slides creados")
   console.log("✅ 3 suscriptores creados")
   console.log("✅ Usuario admin creado")
   console.log("🎉 Seed completado")
