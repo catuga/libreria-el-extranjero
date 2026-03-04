@@ -1,13 +1,13 @@
 import { prisma } from "@/lib/prisma"
-import { EstadoPedido, Prisma } from "@prisma/client"
+import { EstadoPedido } from "@prisma/client"
 import { actualizarEstadoPedido } from "./actions"
 
-type PedidoRow = Prisma.PedidoGetPayload<{
+type PedidoRow = Awaited<ReturnType<typeof prisma.pedido.findMany<{
   include: {
     cliente: { select: { nombre: true; email: true } }
     items: { include: { libro: { select: { titulo: true } } } }
   }
-}>
+}>>>[number]
 
 const estadoColores: Record<EstadoPedido, string> = {
   PENDIENTE: "bg-yellow-50 text-yellow-700",

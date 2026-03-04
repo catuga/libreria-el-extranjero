@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
 import Link from "next/link"
 import { archivarLibro, restaurarLibro, toggleDestacado } from "./actions"
 import Image from "next/image"
 
-type LibroRow = Prisma.LibroGetPayload<Record<string, never>>
+type LibroRow = Awaited<ReturnType<typeof prisma.libro.findMany>>[number]
 
 export default async function AdminLibros() {
   const libros: LibroRow[] = await prisma.libro.findMany({

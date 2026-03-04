@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
 import Link from "next/link"
 import { archivarEvento } from "./actions"
 import Image from "next/image"
 
-type EventoRow = Prisma.EventoGetPayload<Record<string, never>>
+type EventoRow = Awaited<ReturnType<typeof prisma.evento.findMany>>[number]
 
 export default async function AdminEventos() {
   const eventos: EventoRow[] = await prisma.evento.findMany({

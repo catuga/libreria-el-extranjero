@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
 
-type SuscriptorRow = Prisma.SuscriptorGetPayload<Record<string, never>>
-type ClienteRow = Prisma.ClienteGetPayload<{
+type ClienteRow = Awaited<ReturnType<typeof prisma.cliente.findMany<{
   include: { _count: { select: { pedidos: true } } }
-}>
+}>>>[number]
+type SuscriptorRow = Awaited<ReturnType<typeof prisma.suscriptor.findMany>>[number]
 
 export default async function AdminClientes() {
   const clientes: ClienteRow[] = await prisma.cliente.findMany({

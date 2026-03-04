@@ -1,10 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
 import Link from "next/link"
 import Image from "next/image"
 import { eliminarSlide } from "./actions"
 
-type SlideRow = Prisma.SliderItemGetPayload<Record<string, never>>
+type SlideRow = Awaited<ReturnType<typeof prisma.sliderItem.findMany>>[number]
 
 export default async function AdminSlider() {
   const slides: SlideRow[] = await prisma.sliderItem.findMany({

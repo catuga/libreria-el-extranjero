@@ -1,8 +1,7 @@
 import { prisma } from "@/lib/prisma"
-import { Prisma } from "@prisma/client"
 import { enviarNewsletter } from "./actions"
 
-type NewsletterRow = Prisma.NewsletterGetPayload<Record<string, never>>
+type NewsletterRow = Awaited<ReturnType<typeof prisma.newsletter.findMany>>[number]
 
 export default async function AdminNewsletter() {
   const suscriptoresActivos = await prisma.suscriptor.count({ where: { activo: true } })
