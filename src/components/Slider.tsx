@@ -75,25 +75,41 @@ export default function Slider({ slides }: SliderProps) {
       </div>
 
       {slides.length > 1 && (
-        <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10 flex items-center gap-3">
-          <button
-            onClick={prev}
-            className="w-11 h-11 border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors text-xl"
-            aria-label="Anterior"
-          >
-            ‹
-          </button>
-          <span className="text-white/50 text-xs tabular-nums">
-            {current + 1} / {slides.length}
-          </span>
-          <button
-            onClick={next}
-            className="w-11 h-11 border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors text-xl"
-            aria-label="Siguiente"
-          >
-            ›
-          </button>
-        </div>
+        <>
+          {/* Puntos — solo móvil */}
+          <div className="absolute bottom-4 left-0 right-0 z-10 flex justify-center gap-2 md:hidden">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                  i === current ? "bg-white" : "bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+          {/* Flechas — solo desktop */}
+          <div className="absolute bottom-6 right-6 z-10 hidden md:flex items-center gap-3">
+            <button
+              onClick={prev}
+              className="w-11 h-11 border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors text-xl"
+              aria-label="Anterior"
+            >
+              ‹
+            </button>
+            <span className="text-white/50 text-xs tabular-nums">
+              {current + 1} / {slides.length}
+            </span>
+            <button
+              onClick={next}
+              className="w-11 h-11 border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors text-xl"
+              aria-label="Siguiente"
+            >
+              ›
+            </button>
+          </div>
+        </>
       )}
     </div>
   )
