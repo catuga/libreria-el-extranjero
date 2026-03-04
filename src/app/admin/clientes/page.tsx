@@ -1,15 +1,13 @@
 import { prisma } from "@/lib/prisma"
 
 export default async function AdminClientes() {
-  const [clientes, suscriptores] = await Promise.all([
-    prisma.cliente.findMany({
-      orderBy: { createdAt: "desc" },
-      include: { _count: { select: { pedidos: true } } },
-    }),
-    prisma.suscriptor.findMany({
-      orderBy: { createdAt: "desc" },
-    }),
-  ])
+  const clientes = await prisma.cliente.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { _count: { select: { pedidos: true } } },
+  })
+  const suscriptores = await prisma.suscriptor.findMany({
+    orderBy: { createdAt: "desc" },
+  })
 
   const suscriptoresActivos = suscriptores.filter((s) => s.activo).length
 
