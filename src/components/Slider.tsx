@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 
 type Slide = {
@@ -22,9 +22,17 @@ export default function Slider({ slides }: SliderProps) {
 
   if (slides.length === 0) return null
 
-  const slide = slides[current]
   const prev = () => setCurrent((c) => (c === 0 ? slides.length - 1 : c - 1))
   const next = () => setCurrent((c) => (c === slides.length - 1 ? 0 : c + 1))
+
+  // Autoplay: avanza cada 5s, se reinicia al interactuar
+  useEffect(() => {
+    if (slides.length <= 1) return
+    const timer = setInterval(() => {
+      setCurrent((c) => (c === slides.length - 1 ? 0 : c + 1))
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [current, slides.length])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
@@ -39,58 +47,77 @@ export default function Slider({ slides }: SliderProps) {
     touchStartX.current = null
   }
 
+  const slide = slides[current]
+
   return (
     <div
-      className="relative w-full aspect-[4/3] sm:aspect-[16/7] md:aspect-[16/6] overflow-hidden flex items-end"
-      style={{ backgroundColor: slide.color, transition: "background-color 0.4s ease" }}
+      className="relative w-full aspect-[4/3] sm:aspect-[16/7] md:aspect-16/6 overflow-hidden flex items-end"
+      style={{ backgroundColor: slide.color, transition: "background-color 0.5s ease" }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {slide.imagen && (
-        <Image src={slide.imagen} alt="" fill className="object-cover" priority />
-      )}
+      {/* Todas las imágenes apiladas — crossfade con opacity */}
+      {slides.map((s, i) => s.imagen && (
+        <Image
+          key={s.id}
+          src={s.imagen}
+          alt=""
+          fill
+          className="object-cover"
+          style={{ opacity: i === current ? 1 : 0, transition: "opacity 0.5s ease" }}
+          priority={i === 0}
+        />
+      ))}
 
-      {slide.imagen && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-[1]" />
-      )}
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
+        style={{ opacity: slide.imagen ? 1 : 0, transition: "opacity 0.5s ease" }}
+      />
 
-      <div className="relative z-10 p-6 md:p-12 w-full">
-        {slide.etiqueta && (
-          <span
-            className="inline-block text-xs font-semibold tracking-widest px-3 py-1 mb-3"
-            style={{ backgroundColor: "#FFFFFF", color: slide.color }}
-          >
-            {slide.etiqueta}
-          </span>
-        )}
-        <h2
-          className="text-white text-2xl sm:text-3xl md:text-5xl leading-tight max-w-2xl"
-          style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+      {/* Contenido — fade al cambiar slide */}
+      {slides.map((s, i) => (
+        <div
+          key={s.id}
+          className="absolute inset-0 flex flex-col justify-end px-6 pt-6 pb-14 md:p-12 z-10 pointer-events-none"
+          style={{ opacity: i === current ? 1 : 0, transition: "opacity 0.4s ease" }}
         >
-          {slide.titulo}
-        </h2>
-        {slide.descripcion && (
-          <p className="text-white/70 mt-2 text-sm md:text-base max-w-xl">{slide.descripcion}</p>
-        )}
-      </div>
+          {s.etiqueta && (
+            <span
+              className="inline-block text-xs font-semibold tracking-widest px-3 py-1 mb-3 self-start"
+              style={{ backgroundColor: "#FFFFFF", color: s.color }}
+            >
+              {s.etiqueta}
+            </span>
+          )}
+          <h2
+            className="text-white text-2xl sm:text-3xl md:text-5xl leading-tight max-w-2xl"
+            style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+          >
+            {s.titulo}
+          </h2>
+          {s.descripcion && (
+            <p className="text-white/70 mt-2 text-sm md:text-base max-w-xl">{s.descripcion}</p>
+          )}
+        </div>
+      ))}
 
       {slides.length > 1 && (
         <>
-          {/* Puntos — solo móvil */}
-          <div className="absolute bottom-4 left-0 right-0 z-10 flex justify-center gap-2 md:hidden">
+          {/* Puntos — solo móvil, separados del contenido */}
+          <div className="absolute bottom-5 left-0 right-0 z-20 flex justify-center gap-2 md:hidden">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Slide ${i + 1}`}
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  i === current ? "bg-white" : "bg-white/40"
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === current ? "bg-white scale-110" : "bg-white/40"
                 }`}
               />
             ))}
           </div>
           {/* Flechas — solo desktop */}
-          <div className="absolute bottom-6 right-6 z-10 hidden md:flex items-center gap-3">
+          <div className="absolute bottom-6 right-6 z-20 hidden md:flex items-center gap-3">
             <button
               onClick={prev}
               className="w-11 h-11 border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors text-xl"

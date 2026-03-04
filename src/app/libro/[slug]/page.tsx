@@ -16,10 +16,10 @@ export default async function LibroPage({ params }: { params: Promise<{ slug: st
       </Link>
       <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-2">
         {/* Portada */}
-        <div className="relative bg-[#D94F35]/10 w-full max-w-[220px] mx-auto md:mx-0 md:w-56 aspect-[2/3] flex-shrink-0 overflow-hidden">
+        <div className="relative bg-[#E8321A]/10 w-full max-w-[220px] mx-auto md:mx-0 md:w-56 aspect-[2/3] flex-shrink-0 overflow-hidden">
           {libro.portada
             ? <Image src={libro.portada} alt={libro.titulo} fill className="object-cover" />
-            : <span className="absolute inset-0 flex items-center justify-center text-[#D94F35]/40 text-sm">portada</span>
+            : <span className="absolute inset-0 flex items-center justify-center text-[#E8321A]/40 text-sm">portada</span>
           }
         </div>
 
@@ -38,7 +38,7 @@ export default async function LibroPage({ params }: { params: Promise<{ slug: st
             </p>
           )}
 
-          <p className="text-[#D94F35] text-2xl font-semibold mt-6">
+          <p className="text-[#E8321A] text-2xl font-semibold mt-6">
             {libro.precio.toFixed(2)} €
           </p>
           <p className={`text-sm mt-1 ${libro.stock > 0 ? "text-green-700" : "text-[#1A1A1A]/40"}`}>

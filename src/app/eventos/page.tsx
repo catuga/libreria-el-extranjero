@@ -14,7 +14,7 @@ export default async function EventosPage() {
   return (
     <div className="py-6 md:py-10">
       <div className="mb-8 md:mb-10">
-        <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-3">Agenda</p>
+        <p className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] mb-3">Agenda</p>
         <h1
           className="text-2xl md:text-4xl uppercase tracking-wide text-[#1A1A1A]"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
@@ -48,7 +48,7 @@ export default async function EventosPage() {
                       </div>
                     )}
                     <div className="p-5">
-                      <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-2">
+                      <p className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] mb-2">
                         {evento.fecha.toLocaleDateString("es-ES", {
                           weekday: "long",
                           day: "numeric",

@@ -35,7 +35,7 @@ export default async function AdminSlider() {
           <p className="text-sm text-[#1A1A1A]/30 mb-4">Sin diapositivas todavía</p>
           <Link
             href="/admin/slider/nuevo"
-            className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] hover:underline"
+            className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] hover:underline"
           >
             Crear primera diapositiva →
           </Link>
@@ -98,7 +98,7 @@ export default async function AdminSlider() {
                   >
                     <button
                       type="submit"
-                      className="text-xs text-[#1A1A1A]/30 hover:text-[#D94F35] transition-colors"
+                      className="text-xs text-[#1A1A1A]/30 hover:text-[#E8321A] transition-colors"
                     >
                       Eliminar
                     </button>

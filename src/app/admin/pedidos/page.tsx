@@ -109,7 +109,7 @@ export default async function AdminPedidos() {
                     >
                       <button
                         type="submit"
-                        className="shrink-0 text-xs text-[#1A1A1A]/30 hover:text-[#D94F35] transition-colors"
+                        className="shrink-0 text-xs text-[#1A1A1A]/30 hover:text-[#E8321A] transition-colors"
                       >
                         Cancelar
                       </button>

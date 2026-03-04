@@ -27,7 +27,7 @@ export default async function SuscribirsePage({ searchParams }: Props) {
   return (
     <div className="max-w-lg mx-auto py-8 md:py-16">
       <div className="mb-10">
-        <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-3">Newsletter</p>
+        <p className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] mb-3">Newsletter</p>
         <h1
           className="text-2xl md:text-4xl uppercase tracking-wide text-[#1A1A1A] mb-4"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
@@ -74,7 +74,7 @@ export default async function SuscribirsePage({ searchParams }: Props) {
 
           <button
             type="submit"
-            className="w-full bg-[#D94F35] text-white py-3 rounded text-xs font-semibold tracking-widest uppercase hover:bg-[#D94F35]/80 transition-colors"
+            className="w-full bg-[#E8321A] text-white py-3 rounded text-xs font-semibold tracking-widest uppercase hover:bg-[#E8321A]/80 transition-colors"
           >
             Suscribirme
           </button>

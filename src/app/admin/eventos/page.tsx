@@ -36,7 +36,7 @@ export default async function AdminEventos() {
           <p className="text-sm text-[#1A1A1A]/30 mb-4">Sin eventos todavía</p>
           <Link
             href="/admin/eventos/nuevo"
-            className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] hover:underline"
+            className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] hover:underline"
           >
             Crear primer evento →
           </Link>
@@ -52,7 +52,7 @@ export default async function AdminEventos() {
                   </div>
                 )}
                 <div className="p-4">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] mb-1">
+                  <p className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] mb-1">
                     {evento.fecha.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}
                   </p>
                   <h3 className="text-sm font-semibold text-[#1A1A1A] mb-2">{evento.titulo}</h3>
@@ -74,7 +74,7 @@ export default async function AdminEventos() {
                     >
                       <button
                         type="submit"
-                        className="text-xs text-[#1A1A1A]/30 hover:text-[#D94F35] transition-colors"
+                        className="text-xs text-[#1A1A1A]/30 hover:text-[#E8321A] transition-colors"
                       >
                         Archivar
                       </button>

@@ -61,7 +61,7 @@ export default function NuevoSlide() {
                 <input
                   name="color"
                   type="color"
-                  defaultValue="#D94F35"
+                  defaultValue="#E8321A"
                   className="w-10 h-10 rounded border border-[#1A1A1A]/15 cursor-pointer p-0.5"
                 />
                 <span className="text-xs text-[#1A1A1A]/40">Se usa si no hay imagen</span>

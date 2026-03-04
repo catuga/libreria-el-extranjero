@@ -204,7 +204,7 @@ export default function LibroForm({ action, defaultValues = {}, submitLabel }: L
             name="destacado"
             type="checkbox"
             defaultChecked={defaultValues.destacado}
-            className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#D94F35]"
+            className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#E8321A]"
           />
           <span className="text-sm text-[#1A1A1A]">Mostrar en página de inicio (destacado)</span>
         </label>

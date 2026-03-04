@@ -108,7 +108,7 @@ export default async function ContactoPage({ searchParams }: Props) {
           </p>
           <p>Sevilla</p>
           <p>
-            <a href="mailto:hola@elextranjero.es" className="hover:text-[#D94F35] transition-colors">
+            <a href="mailto:hola@elextranjero.es" className="hover:text-[#E8321A] transition-colors">
               hola@elextranjero.es
             </a>
           </p>

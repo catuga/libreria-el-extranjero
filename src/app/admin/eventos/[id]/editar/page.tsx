@@ -97,7 +97,7 @@ export default async function EditarEvento({ params }: Props) {
               type="checkbox"
               defaultChecked={evento.activo}
               value="true"
-              className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#D94F35]"
+              className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#E8321A]"
             />
             <span className="text-sm text-[#1A1A1A]">Evento activo (visible en la web)</span>
           </label>

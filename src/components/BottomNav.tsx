@@ -62,7 +62,7 @@ export default function BottomNav() {
               key={href}
               href={href}
               className={`flex flex-col items-center gap-1 px-4 py-2 transition-colors ${
-                active ? "text-[#D94F35]" : "text-[#1A1A1A]/40"
+                active ? "text-[#E8321A]" : "text-[#1A1A1A]/40"
               }`}
             >
               {icon}

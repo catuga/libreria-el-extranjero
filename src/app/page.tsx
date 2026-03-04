@@ -32,16 +32,16 @@ export default async function HomePage() {
           {destacados.map((libro) => (
             <Link key={libro.id} href={`/libro/${libro.slug}`} className="group">
               {/* Cover grande */}
-              <div className="relative bg-[#D94F35]/8 aspect-[3/4] overflow-hidden mb-5 group-hover:bg-[#D94F35]/15 transition-colors">
+              <div className="relative bg-[#E8321A]/8 aspect-[3/4] overflow-hidden mb-5 group-hover:bg-[#E8321A]/15 transition-colors">
                 {libro.portada
                   ? <Image src={libro.portada} alt={libro.titulo} fill className="object-cover" />
-                  : <span className="absolute inset-0 flex items-center justify-center text-[#D94F35]/30 text-xs uppercase tracking-widest">portada</span>
+                  : <span className="absolute inset-0 flex items-center justify-center text-[#E8321A]/30 text-xs uppercase tracking-widest">portada</span>
                 }
                 {/* Etiqueta superpuesta al hover — estilo Materia Prima */}
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                   <span
                     className="inline-block text-xs font-semibold tracking-wider px-3 py-1.5"
-                    style={{ backgroundColor: "#FFFFFF", color: "#D94F35" }}
+                    style={{ backgroundColor: "#FFFFFF", color: "#E8321A" }}
                   >
                     {libro.generos[0] ?? "LITERATURA"}
                   </span>
@@ -67,7 +67,7 @@ export default async function HomePage() {
         <div className="mt-12 text-center">
           <Link
             href="/catalogo"
-            className="text-xs font-semibold tracking-widest uppercase border-b border-[#1A1A1A]/30 pb-0.5 hover:border-[#D94F35] hover:text-[#D94F35] transition-colors"
+            className="text-xs font-semibold tracking-widest uppercase border-b border-[#1A1A1A]/30 pb-0.5 hover:border-[#E8321A] hover:text-[#E8321A] transition-colors"
           >
             Ver catálogo completo →
           </Link>

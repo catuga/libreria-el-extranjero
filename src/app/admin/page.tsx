@@ -50,7 +50,7 @@ export default async function AdminDashboard() {
             href={href}
             className="bg-white border border-[#1A1A1A]/10 rounded-lg p-5 hover:border-[#1A1A1A]/30 transition-colors group"
           >
-            <p className="text-3xl font-semibold text-[#1A1A1A] group-hover:text-[#D94F35] transition-colors">
+            <p className="text-3xl font-semibold text-[#1A1A1A] group-hover:text-[#E8321A] transition-colors">
               {data[key as keyof typeof data]}
             </p>
             <p className="text-xs tracking-widest uppercase text-[#1A1A1A]/40 mt-1">{label}</p>

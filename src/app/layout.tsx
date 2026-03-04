@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <a
               href="/suscribirse"
-              className="text-xs font-semibold tracking-widest uppercase text-[#D94F35] hover:underline"
+              className="text-xs font-semibold tracking-widest uppercase text-[#E8321A] hover:underline"
             >
               Newsletter →
             </a>

@@ -119,7 +119,7 @@ export default async function EditarSlide({ params }: Props) {
               name="activo"
               type="checkbox"
               defaultChecked={slide.activo}
-              className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#D94F35]"
+              className="w-4 h-4 rounded border-[#1A1A1A]/30 accent-[#E8321A]"
             />
             <span className="text-sm text-[#1A1A1A]">Diapositiva activa (visible en la web)</span>
           </label>

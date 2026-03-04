@@ -74,7 +74,7 @@ export default async function AdminLibros() {
                   {libro.stock > 0 ? (
                     <span>{libro.stock}</span>
                   ) : (
-                    <span className="text-[#D94F35]">Sin stock</span>
+                    <span className="text-[#E8321A]">Sin stock</span>
                   )}
                 </td>
                 <td className="px-5 py-3 text-center hidden lg:table-cell">
@@ -109,7 +109,7 @@ export default async function AdminLibros() {
                     >
                       <button
                         type="submit"
-                        className="text-xs text-[#1A1A1A]/30 hover:text-[#D94F35] transition-colors"
+                        className="text-xs text-[#1A1A1A]/30 hover:text-[#E8321A] transition-colors"
                       >
                         Archivar
                       </button>
