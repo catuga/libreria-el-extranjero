@@ -9,7 +9,7 @@ export default async function AdminClientes() {
     orderBy: { createdAt: "desc" },
   })
 
-  const suscriptoresActivos = suscriptores.filter((s) => s.activo).length
+  const suscriptoresActivos = suscriptores.filter((s: { activo: boolean }) => s.activo).length
 
   return (
     <div className="p-8">
